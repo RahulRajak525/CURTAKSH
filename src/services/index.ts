@@ -1,0 +1,10 @@
+/** Barrel for the service layer — components import from '@/services'. */
+export * from './catalog'
+export * from './cart'
+export * from './wishlist'
+export * from './search'
+export * from './appointment'
+export * from './swatch'
+export * from './lookbook'
+export * from './stores'
+export * from './contact'

@@ -1,0 +1,75 @@
+/*
+ * DRAPÉ design tokens.
+ *
+ * Colour variables below are the *initial* state (NOON anchor) so the page
+ * paints correctly before JS runs. At runtime the Light Engine
+ * (lib/theme.ts → LightProvider) overwrites the colour + shadow + light
+ * variables on :root every time the light phase changes.
+ *
+ * The static tokens (fonts, type, spacing, radii, motion) live here as the
+ * single source of truth and are mapped into Tailwind via tailwind.config.js.
+ */
+
+:root {
+  /* ---- Palette (NOON defaults; runtime-mutable) ---- */
+  --bg: #f4f0e9;
+  --bg-rgb: 244 240 233;
+  --surface: #fcfaf6;
+  --surface-rgb: 252 250 246;
+  --ink: #1a1714;
+  --ink-rgb: 26 23 20;
+  --muted: #8a8078;
+  --muted-rgb: 138 128 120;
+  --line: #e4ddd1;
+  --line-rgb: 228 221 209;
+  --accent: #c89b5a;
+  --accent-rgb: 200 155 90;
+  --glow: #c89b5a;
+  --glow-rgb: 200 155 90;
+
+  /* ---- Light-reactive shadow + intensity ---- */
+  --shadow-color: #5a4a38;
+  --shadow-color-rgb: 90 74 56;
+  --shadow-y: 6px;
+  --shadow-blur: 16px;
+  --shadow-alpha: 0.18;
+  --light-intensity: 1;
+
+  /* ---- Typography ---- */
+  --font-display: 'Fraunces', 'Inter', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Geist Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono', 'JetBrains Mono', ui-monospace, 'Courier New',
+    monospace;
+
+  /* ---- Spacing (4px base scale) ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --section-py: clamp(96px, 14vh, 220px);
+  --gutter: clamp(20px, 5vw, 80px);
+
+  /* ---- Radii ---- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* ---- Glass ---- */
+  --glass-alpha: 0.6;
+  --glass-blur: 20px;
+
+  /* ---- Motion (mirrors lib/motion.ts) ---- */
+  --dur-fast: 0.2s;
+  --dur-base: 0.45s;
+  --dur-slow: 0.8s;
+  --dur-cinematic: 1.2s;
+  --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-entrance: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-drape: cubic-bezier(0.83, 0, 0.17, 1);
+}
