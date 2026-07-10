@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { MoveHorizontal } from 'lucide-react'
 import { Container, Section, Label } from '@/components/ui'
+import { getImageUrl } from '@/lib/getImageUrl'
 import { home } from '@/config/home'
 import { clamp } from '@/lib/utils'
 
@@ -65,12 +66,20 @@ export function DrapeReveal() {
           onPointerLeave={() => (draggingRef.current = false)}
           className="relative aspect-[16/10] w-full touch-none select-none overflow-hidden rounded-lg border border-line shadow-soft"
         >
-          {/* BARE — harsh, cold, glaring window */}
+          {/* BARE — the room as-is, seen through an undressed window */}
+          <img
+            src={getImageUrl(drapeReveal.image)}
+            alt={drapeReveal.imageAlt}
+            draggable={false}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          {/* a touch of cold glare over the bare view */}
           <div
+            aria-hidden
             className="absolute inset-0"
             style={{
               background:
-                'radial-gradient(120% 90% at 50% 35%, #ffffff, #e7edf2 45%, #cfd8e0 75%, #b9c4ce)',
+                'radial-gradient(120% 90% at 50% 30%, rgb(255 255 255 / 0.28), transparent 55%)',
             }}
           />
           {/* DRESSED — warm, softened, curtained (clipped from the left to `pos`) */}
@@ -89,13 +98,6 @@ export function DrapeReveal() {
                   rgb(var(--surface-rgb)) 54px)`,
             }}
           />
-          {/* window mullions (frame reads across both sides) */}
-          <div aria-hidden className="pointer-events-none absolute inset-0">
-            <div className="absolute inset-[8%] border border-ink/15" />
-            <div className="absolute inset-y-[8%] left-1/2 w-px -translate-x-1/2 bg-ink/15" />
-            <div className="absolute inset-x-[8%] top-1/2 h-px -translate-y-1/2 bg-ink/15" />
-          </div>
-
           {/* side labels */}
           <span className="pointer-events-none absolute right-4 top-4 rounded-full bg-ink/60 px-3 py-1 text-[11px] uppercase tracking-wide text-white">
             {drapeReveal.bareLabel}

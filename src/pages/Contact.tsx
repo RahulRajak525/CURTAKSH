@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail, Clock } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, MessageCircle } from 'lucide-react'
 import { useStores } from '@/hooks'
 import { Container, Section, PageHero, Label, Reveal, Skeleton } from '@/components/ui'
 import { ContactForm } from '@/components/contact/ContactForm'
@@ -36,10 +36,25 @@ export function Contact() {
                     </a>
                   </li>
                   <li className="flex items-center gap-3">
+                    <MessageCircle className="h-4 w-4 shrink-0 text-ink" strokeWidth={1.6} />
+                    <a
+                      href={`https://wa.me/${site.contact.whatsapp.replace(/[^\d]/g, '')}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-ink hover:opacity-70"
+                    >
+                      WhatsApp
+                    </a>
+                  </li>
+                  <li className="flex items-center gap-3">
                     <Mail className="h-4 w-4 shrink-0 text-ink" strokeWidth={1.6} />
                     <a href={`mailto:${site.contact.email}`} className="text-ink hover:opacity-70">
                       {site.contact.email}
                     </a>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-ink" strokeWidth={1.6} />
+                    <span className="text-muted">{site.contact.address}</span>
                   </li>
                   <li className="flex items-center gap-3">
                     <Clock className="h-4 w-4 shrink-0 text-ink" strokeWidth={1.6} />

@@ -12,6 +12,7 @@ import { AppointmentForm } from "@/components/atelier/AppointmentForm";
 import { useLenis } from "@/components/motion/SmoothScrollProvider";
 import { getImageUrl } from "@/lib/getImageUrl";
 import { content } from "@/config/content";
+import { pexels } from "@/config/media";
 import { site } from "@/config/site";
 
 export function DesignService() {
@@ -30,14 +31,29 @@ export function DesignService() {
     <>
       {/* hero */}
       <Section className="relative overflow-hidden">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(80% 90% at 20% 0%, rgb(var(--glow-rgb) / 0.4), transparent 55%)",
-          }}
-        />
+        {/* free-stock interior, faded into the page on the left so the dark
+            headline stays legible */}
+        <div aria-hidden="true" className="absolute inset-0">
+          <img
+            src={getImageUrl(pexels(6207825, 1800))}
+            alt=""
+            className="h-full w-full object-cover object-center"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(90deg, rgb(var(--bg-rgb)) 0%, rgb(var(--bg-rgb) / 0.9) 32%, rgb(var(--bg-rgb) / 0.4) 62%, rgb(var(--bg-rgb) / 0.15) 100%)",
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(80% 90% at 20% 0%, rgb(var(--glow-rgb) / 0.4), transparent 55%)",
+            }}
+          />
+        </div>
         <Container className="relative">
           <div className="max-w-2xl">
             {/* <Label className="mb-6 block">{ds.hero.eyebrow}</Label> */}

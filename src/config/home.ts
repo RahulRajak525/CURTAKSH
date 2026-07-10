@@ -45,7 +45,10 @@ export const home = {
     sub: 'Pull the handle across a bare, glaring window and watch the room soften — warmer light, quieter glare, a space you want to be in.',
     bareLabel: 'Bare window',
     dressedLabel: 'Dressed in Curtaksh',
+    image: '/decorandblinds/71gnRZD8N5L._AC_UF894,1000_QL80_.jpg',
+    imageAlt: 'A sunlit room interior seen through a bare window',
   },
+
 
   materials: {
     eyebrow: 'Materials',
@@ -105,5 +108,7 @@ export const home = {
     headline: 'Dress your windows in light.',
     sub: 'Order free swatches, or book a consultation with our atelier. No pressure — just better light.',
     reassurance: 'Free swatches, delivered across India. Made to measure, installed by our team.',
+    image: '/decorandblinds/WhatsApp_Image_2026-06-21_at_16.55.54_11-scaled.jpeg',
+    imageAlt: 'A stairwell window dressed in warm wooden blinds, sunlight filtering through the slats',
   },
 } as const

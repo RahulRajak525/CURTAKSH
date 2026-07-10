@@ -4,6 +4,16 @@ import type { Store } from '@/types'
  *  Structured so a map / distance API can slot in later (lat/lng present). */
 export const stores: Store[] = [
   {
+    id: 'store-gurgaon',
+    name: 'Curtaksh Gurgaon',
+    city: 'Gurgaon',
+    address: 'Plot No. 1142/53, Saraswati Kunj, DLF Phase 5, Gurgaon 122009',
+    phone: '+91 92662 33858',
+    hours: 'Mon–Sat, 10–7',
+    lat: 28.4515,
+    lng: 77.0996,
+  },
+  {
     id: 'store-mumbai',
     name: 'CurtakshMumbai',
     city: 'Mumbai',

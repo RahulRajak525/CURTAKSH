@@ -10,24 +10,30 @@ import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
  * outward to reveal the incoming page. Total ≈ 900ms on the "drape" easing.
  *
  * Mechanics: this component is the keyed child of an <AnimatePresence mode="wait">.
- *   - enter: panels start CLOSED (covering) → animate to REVEALED (parted)
- *   - exit:  panels animate REVEALED → CLOSED
- * Because exit fully completes before the next enter begins, the crossover
- * happens while the screen is fully covered — so it reads as one continuous
- * curtain even though the page content swaps underneath.
+ *   - enter: panels render already CLOSED (covering), hold a beat, → part slowly open
+ *   - exit:  panels snap CLOSED instantly (no visible "drawing closed" sweep)
+ * So on both a fresh load/refresh AND a route change, the page appears with the
+ * curtains already shut and the only motion you see is the slow, smooth reveal.
+ * (mode="wait" means the incoming page mounts in its closed state behind the
+ * covered screen, so the content swap is never visible.)
  *
  * Under prefers-reduced-motion this degrades to a simple cross-fade.
  */
 
-const PANEL_MS = 0.46
+/** Parting open — slow and smooth, the only visible motion. */
+const OPEN_MS = 1.7
+/** Hold fully closed for a beat before parting, so the closed state registers. */
+const OPEN_DELAY = 0.35
 
 const rootVariants: Variants = { covering: {}, revealed: {} }
 
 const panelVariants: Variants = {
-  covering: { x: '0%', transition: { duration: PANEL_MS, ease: ease.drape } },
+  // Closed: instant, so leaving a page never shows a draw-closed animation —
+  // the next page is simply already shut when it appears.
+  covering: { x: '0%', transition: { duration: 0 } },
   revealed: (side: 'left' | 'right') => ({
     x: side === 'left' ? '-101%' : '101%',
-    transition: { duration: PANEL_MS, ease: ease.drape },
+    transition: { duration: OPEN_MS, delay: OPEN_DELAY, ease: ease.settle },
   }),
 }
 
@@ -58,7 +64,7 @@ function CurtainPanel({ side }: { side: 'left' | 'right' }) {
         style={{
           background:
             'linear-gradient(180deg, transparent, rgb(var(--glow-rgb) / 0.35), transparent)',
-          animation: 'drape-sheen 0.9s ease-out',
+          animation: 'drape-sheen 1.9s ease-out 0.35s',
         }}
       />
     </motion.div>

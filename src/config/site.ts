@@ -8,10 +8,11 @@ export const site = {
   locale: 'en-IN',
   currency: 'INR',
   contact: {
-    email: 'atelier@drape.example',
-    phone: '+1 (212) 555-0147',
-    address: '84 Meridian Row, New York, NY 10013',
-    hours: 'Tue–Sat, 10–6',
+    email: 'info@decorandblinds.com',
+    phone: '+91 92662 33858',
+    whatsapp: '+919266233858',
+    address: 'Plot No. 1142/53, Saraswati Kunj, DLF Phase 5, Gurgaon 122009',
+    hours: 'Mon–Sat, 10–7',
   },
   social: [
     { label: 'Instagram', href: 'https://instagram.com/drape' },
