@@ -13,6 +13,8 @@ import { PageTransition } from '@/components/motion/PageTransition'
 import { LightScrubber } from '@/components/LightScrubber'
 import { Navbar } from '@/components/chrome/Navbar'
 import { Footer } from '@/components/chrome/Footer'
+import { FloatingWhatsApp } from '@/components/chrome/FloatingWhatsApp'
+import { ScrollToTop } from '@/components/chrome/ScrollToTop'
 
 import { Home } from '@/pages/Home'
 import { NotFound } from '@/pages/NotFound'
@@ -85,6 +87,8 @@ function AppShell() {
       </main>
       <Footer />
       <LightScrubber />
+      <FloatingWhatsApp />
+      <ScrollToTop />
       <FilmGrain />
     </div>
   )

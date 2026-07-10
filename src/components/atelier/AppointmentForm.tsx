@@ -4,6 +4,7 @@ import { Button } from '@/components/ui'
 import { requestConsultation } from '@/services'
 import { content } from '@/config/content'
 import { cn } from '@/lib/utils'
+import { openWhatsApp, composeWhatsappMessage } from '@/lib/whatsapp'
 
 type Fields = {
   name: string
@@ -51,6 +52,20 @@ export function AppointmentForm() {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!validate()) return
+
+    // Route the booking inquiry to WhatsApp (app on mobile, web on desktop).
+    // Opened synchronously within the submit gesture so it isn't popup-blocked.
+    openWhatsApp(
+      composeWhatsappMessage('Hi Curtaksh, I’d like to book a consultation.', [
+        ['Name', values.name],
+        ['Email', values.email],
+        ['Phone', values.phone],
+        ['City', values.city],
+        ['Project', values.projectType],
+        ['Message', values.message],
+      ]),
+    )
+
     setBusy(true)
     await requestConsultation({
       name: values.name,

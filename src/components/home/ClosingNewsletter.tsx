@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { Check } from 'lucide-react'
-import { Container, Section, Button } from '@/components/ui'
+import { Container, Section, SlideButton } from '@/components/ui'
 import { getImageUrl } from '@/lib/getImageUrl'
 import { home } from '@/config/home'
 import { site } from '@/config/site'
@@ -83,9 +83,9 @@ export function ClosingNewsletter() {
                   aria-label="Email address"
                   className="h-12 flex-1 rounded-full border border-line bg-bg/60 px-5 text-small text-ink outline-none backdrop-blur transition-colors placeholder:text-muted/70 focus:border-ink"
                 />
-                <Button type="submit" variant="solid" size="lg">
+                <SlideButton type="submit" size="lg">
                   {site.newsletter.cta}
-                </Button>
+                </SlideButton>
               </form>
             )}
 

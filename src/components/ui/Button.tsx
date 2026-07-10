@@ -22,6 +22,13 @@ const VARIANTS: Record<ButtonVariant, string> = {
   ghost: 'text-ink hover:bg-ink/[0.06]',
 }
 
+/** Tint of the hover light-sweep, keyed to each variant's surface. */
+const SHEEN: Record<ButtonVariant, string> = {
+  solid: 'via-bg/30',
+  outline: 'via-ink/10',
+  ghost: 'via-ink/10',
+}
+
 const SIZES: Record<ButtonSize, string> = {
   sm: 'h-9 px-4 text-sm',
   md: 'h-11 px-6 text-sm',
@@ -55,7 +62,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          'group inline-flex select-none items-center justify-center gap-2 rounded-full font-sans font-medium',
+          'group relative inline-flex select-none items-center justify-center gap-2 overflow-hidden rounded-full font-sans font-medium',
           'transition-[background-color,border-color,color,transform] duration-fast ease-settle',
           'active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50',
           VARIANTS[variant],
@@ -64,9 +71,27 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         {...props}
       >
-        {iconLeft}
-        <span>{children}</span>
-        {iconRight}
+        {/* Light-sweep: a slow sheen glides across on hover. */}
+        <span
+          aria-hidden="true"
+          className={cn(
+            'pointer-events-none absolute inset-0 -translate-x-[130%] skew-x-[-20deg] bg-gradient-to-r from-transparent to-transparent',
+            'transition-transform duration-[900ms] ease-out group-hover:translate-x-[130%]',
+            'motion-reduce:hidden',
+            SHEEN[variant],
+          )}
+        />
+        {iconLeft && (
+          <span className="relative z-[1] inline-flex transition-transform duration-base ease-settle group-hover:-translate-x-0.5 motion-reduce:transform-none">
+            {iconLeft}
+          </span>
+        )}
+        <span className="relative z-[1]">{children}</span>
+        {iconRight && (
+          <span className="relative z-[1] inline-flex transition-transform duration-base ease-settle group-hover:translate-x-0.5 motion-reduce:transform-none">
+            {iconRight}
+          </span>
+        )}
       </button>
     )
 

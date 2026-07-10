@@ -4,6 +4,7 @@ import { Button } from '@/components/ui'
 import { submitContact } from '@/services'
 import { content } from '@/config/content'
 import { cn } from '@/lib/utils'
+import { openWhatsApp, composeWhatsappMessage } from '@/lib/whatsapp'
 
 type Fields = { name: string; email: string; topic: string; message: string }
 const empty: Fields = { name: '', email: '', topic: '', message: '' }
@@ -30,6 +31,17 @@ export function ContactForm() {
     if (!values.message.trim()) next.message = 'Please enter a message'
     setErrors(next)
     if (Object.keys(next).length) return
+
+    // Route the inquiry to WhatsApp (app on mobile, web on desktop). Opened
+    // synchronously within the submit gesture so the tab isn't popup-blocked.
+    openWhatsApp(
+      composeWhatsappMessage('Hi Curtaksh, I have an inquiry.', [
+        ['Name', values.name],
+        ['Email', values.email],
+        ['Topic', values.topic],
+        ['Message', values.message],
+      ]),
+    )
 
     setBusy(true)
     await submitContact(values)

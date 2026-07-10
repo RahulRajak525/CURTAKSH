@@ -1,5 +1,7 @@
 export { Button } from './Button'
 export type { ButtonProps, ButtonVariant, ButtonSize } from './Button'
+export { SlideButton } from './SlideButton'
+export type { SlideButtonProps } from './SlideButton'
 export { IconButton } from './IconButton'
 export type { IconButtonProps } from './IconButton'
 export { Container } from './Container'

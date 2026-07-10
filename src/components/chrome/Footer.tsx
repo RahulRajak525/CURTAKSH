@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { Camera, Video, Bookmark, ArrowUpRight, MapPin, Phone } from 'lucide-react'
 import { site } from '@/config/site'
 import { footerNav } from '@/config/navigation'
-import { Container, Button, Label, Divider, Reveal } from '@/components/ui'
+import { Container, SlideButton, Label, Divider, Reveal } from '@/components/ui'
 
 /** Newsletter capture — stubbed submit with a success state. */
 function Newsletter() {
@@ -40,9 +40,9 @@ function Newsletter() {
             aria-label="Email address"
             className="h-11 flex-1 rounded-full border border-line bg-transparent px-4 text-small text-ink outline-none transition-colors placeholder:text-muted/70 focus:border-ink"
           />
-          <Button type="submit" variant="solid" size="md">
+          <SlideButton type="submit" size="md">
             {newsletter.cta}
-          </Button>
+          </SlideButton>
         </form>
       )}
     </div>
