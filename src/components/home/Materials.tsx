@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Volume2, VolumeX } from 'lucide-react'
 import type { Fabric } from '@/types'
 import { useFabrics } from '@/hooks'
-import { Container, Section, Label, Skeleton } from '@/components/ui'
+import { Container, Section, Label, Reveal, Skeleton, SplitText } from '@/components/ui'
 import { getImageUrl } from '@/lib/getImageUrl'
 import { formatPrice } from '@/lib/format'
 import { home } from '@/config/home'
@@ -120,11 +120,19 @@ export function Materials() {
       <Container>
         <div className="mb-10 flex items-end justify-between gap-6">
           <div className="max-w-xl">
-            <Label className="mb-3 block">{home.materials.eyebrow}</Label>
-            <h2 className="font-display text-h1 text-ink">
-              {home.materials.headline}
-            </h2>
-            <p className="mt-4 text-body text-muted">{home.materials.sub}</p>
+            <Reveal variant="right">
+              <Label className="mb-3 block">{home.materials.eyebrow}</Label>
+            </Reveal>
+            <SplitText
+              as="h2"
+              text={home.materials.headline}
+              splitBy="char"
+              delay={0.1}
+              className="block font-display text-h1 text-ink"
+            />
+            <Reveal variant="fade" delay={0.25}>
+              <p className="mt-4 text-body text-muted">{home.materials.sub}</p>
+            </Reveal>
           </div>
           <button
             type="button"
@@ -150,8 +158,10 @@ export function Materials() {
           <Skeleton className="aspect-[16/10] w-full rounded-lg" />
         ) : (
           <>
-            <Preview fabric={activeFabric} />
-            <div className="mt-6 flex flex-wrap gap-3">
+            <Reveal variant="blur">
+              <Preview fabric={activeFabric} />
+            </Reveal>
+            <Reveal variant="fade" delay={0.15} className="mt-6 flex flex-wrap gap-3">
               {fabrics.map((fabric, i) => (
                 <button
                   key={fabric.id}
@@ -174,7 +184,7 @@ export function Materials() {
                   {fabric.name}
                 </button>
               ))}
-            </div>
+            </Reveal>
           </>
         )}
       </Container>

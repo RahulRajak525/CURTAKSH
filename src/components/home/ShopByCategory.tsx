@@ -2,7 +2,15 @@ import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
 import type { Collection } from '@/types'
 import { useCollections } from '@/hooks'
-import { Container, Section, Label, Reveal, Skeleton } from '@/components/ui'
+import {
+  Container,
+  Section,
+  Label,
+  Reveal,
+  RippleImage,
+  Skeleton,
+  SplitText,
+} from '@/components/ui'
 import { getImageUrl } from '@/lib/getImageUrl'
 import { home } from '@/config/home'
 import { cn } from '@/lib/utils'
@@ -13,29 +21,24 @@ function CategoryCard({ collection }: { collection: Collection }) {
       to={`/collections/${collection.slug}`}
       className="group relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-lg border border-line shadow-soft transition-shadow duration-base ease-settle hover:shadow-glow"
     >
-      {/* image / gradient placeholder — scales on hover */}
+      {/* fabric-ripple image (plain <img> on mobile/reduced-motion) — scales on hover */}
       <div
         className="absolute inset-0 transition-transform duration-cinematic ease-settle group-hover:scale-[1.06]"
-        style={{
-          backgroundColor: 'rgb(var(--ink-rgb) / 0.06)',
-          backgroundImage: `linear-gradient(to top, rgb(var(--ink-rgb) / 0.6), transparent 62%), url(${getImageUrl(
-            collection.heroImage,
-          )})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
-      {/* light-sweep on hover */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -translate-x-full opacity-0 transition-all duration-cinematic ease-settle group-hover:translate-x-0 group-hover:opacity-100"
-        style={{
-          background:
-            'linear-gradient(105deg, transparent 30%, rgb(var(--glow-rgb) / 0.35) 50%, transparent 70%)',
-        }}
-      />
-      {/* label slides up on hover */}
-      <div className="relative p-6">
+        style={{ backgroundColor: 'rgb(var(--ink-rgb) / 0.06)' }}
+      >
+        <RippleImage src={getImageUrl(collection.heroImage)} />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(to top, rgb(var(--ink-rgb) / 0.6), transparent 62%)',
+          }}
+        />
+      </div>
+      {/* label slides up on hover (pointer-events off so the ripple tracks the
+          full card; clicks still land on the Link) */}
+      <div className="pointer-events-none relative p-6">
         <p className="font-display text-h3 text-bg">{collection.name}</p>
         <p className="mt-1 flex items-center gap-1 text-small text-bg/80 transition-transform duration-base ease-settle group-hover:-translate-y-0.5">
           {collection.tagline}
@@ -52,14 +55,20 @@ export function ShopByCategory() {
   return (
     <Section>
       <Container>
-        <Reveal variant="fade" className="mb-12 flex items-end justify-between">
+        <div className="mb-12 flex items-end justify-between">
           <div>
-            <Label className="mb-3 block">{home.categories.eyebrow}</Label>
-            <h2 className="font-display text-h1 text-ink">
-              {home.categories.title}
-            </h2>
+            <Reveal variant="left">
+              <Label className="mb-3 block">{home.categories.eyebrow}</Label>
+            </Reveal>
+            <SplitText
+              as="h2"
+              text={home.categories.title}
+              splitBy="word"
+              delay={0.1}
+              className="block font-display text-h1 text-ink"
+            />
           </div>
-        </Reveal>
+        </div>
 
         <div
           className={cn(

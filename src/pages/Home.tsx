@@ -3,6 +3,7 @@ import { MarqueeStrip } from '@/components/home/MarqueeStrip'
 import { ShopByCategory } from '@/components/home/ShopByCategory'
 import { FeaturedCollection } from '@/components/home/FeaturedCollection'
 import { ProductShowcase } from '@/components/home/ProductShowcase'
+import { FabricOfLight } from '@/components/home/FabricOfLight'
 import { DrapeReveal } from '@/components/home/DrapeReveal'
 import { Materials } from '@/components/home/Materials'
 import { Atelier } from '@/components/home/Atelier'
@@ -21,6 +22,7 @@ export function Home() {
       <ShopByCategory />
       <FeaturedCollection />
       <ProductShowcase />
+      <FabricOfLight />
       <DrapeReveal />
       <Materials />
       <Atelier />

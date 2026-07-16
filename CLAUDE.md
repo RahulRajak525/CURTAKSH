@@ -61,7 +61,9 @@ Environment: Windows, PowerShell + Git Bash. Node 24, npm 10.
   (`settle`, `entrance`, `drape`), Framer variants (`fadeUp`, `revealMask`, `stagger`).
 - `components/ui/` (barrel `@/components/ui`): Button (solid/outline/ghost + `magnetic`),
   IconButton, Container (`size` narrow/default/wide/full), Section, GlassPanel, Badge, Label
-  (mono), Divider, Reveal, SplitText, Marquee.
+  (mono), Divider, Reveal (variants mask/fade/left/right/blur), SplitText, Marquee.
+- Homepage text choreography: section headlines animate via SplitText word/char cascades;
+  eyebrows/copy/CTAs use directional Reveals (left/right/blur) with small delays.
 - `.glass` and `.label` are component classes in `src/index.css`.
 
 ## App shell & routing
@@ -114,8 +116,8 @@ state so gallery + configurator share colour/lining. Parts:
 
 ## Homepage (pages/Home.tsx → components/home/)
 Cinematic scroll page. Sections in order: Hero → MarqueeStrip → ShopByCategory →
-FeaturedCollection → ProductShowcase → DrapeReveal → Materials → Atelier → SocialProof →
-ClosingNewsletter. All copy in `config/home.ts`; all data via `useCollections/useProducts/
+FeaturedCollection → ProductShowcase → FabricOfLight → DrapeReveal → Materials → Atelier →
+SocialProof → ClosingNewsletter. All copy in `config/home.ts`; all data via `useCollections/useProducts/
 useFabrics` with `Skeleton` loading states + empty/error UI.
 - **Hero** = "The Living Window": `components/three/ClothCurtainsHero.tsx` (default-exported,
   `React.lazy`'d) is a verlet cloth sim — cursor-as-wind (pointer force + pointer-down gust),
@@ -123,6 +125,17 @@ useFabrics` with `Skeleton` loading states + empty/error UI.
   CSS backdrop as poster/fallback and swaps to it entirely on mobile / reduced-motion
   (`useIsMobile`, `usePrefersReducedMotion`); sim pauses offscreen (IntersectionObserver →
   Canvas `frameloop`).
+- **ShopByCategory tiles** render through `components/ui/RippleImage` — plain `<img>` poster
+  everywhere; on desktop (no reduced-motion) a lazy WebGL shader (`components/three/
+  RippleImageCanvas.tsx`, default export) mounts on first hover: cursor-brushed fabric ripple +
+  Light-Engine-tinted sheen. Frameloop pauses ~1.4s after leave; CORS/texture failure falls back
+  to the `<img>`. Reusable anywhere via the `@/components/ui` barrel.
+- **FabricOfLight** = "The Fabric of Light" band: `components/three/SilkRibbonField.tsx`
+  (default-exported, `React.lazy`'d) — a vertex-shader silk sheet (derivative-normal shading,
+  cursor swell) recoloured every frame from `lightPhase`. Overlay HUD: live phase readout
+  (imperative store subscription) + Dawn/Noon/Dusk/Night buttons calling `setLightPhase`
+  (re-lights the whole site) + CTA to /fabrics. Mobile/reduced-motion → token gradient backdrop;
+  sim pauses offscreen. Copy in `config/home.ts` (`fabricOfLight`).
 - **FeaturedCollection** uses GSAP parallax + a brief ScrollTrigger pin (static under reduced-motion).
 - **DrapeReveal** = draggable before/after slider, ARIA `slider` + keyboard.
 - **Materials** = macro-zoom on hover + optional WebAudio "rustle" toggle (off by default).

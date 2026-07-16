@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import { MoveHorizontal } from 'lucide-react'
-import { Container, Section, Label } from '@/components/ui'
+import { Container, Section, Label, Reveal, SplitText } from '@/components/ui'
 import { getImageUrl } from '@/lib/getImageUrl'
 import { home } from '@/config/home'
 import { clamp } from '@/lib/utils'
@@ -46,13 +46,22 @@ export function DrapeReveal() {
     <Section>
       <Container>
         <div className="mb-10 max-w-xl">
-          <Label className="mb-3 block">{drapeReveal.eyebrow}</Label>
-          <h2 className="font-display text-h1 leading-[1.02] text-ink">
-            {drapeReveal.headline}
-          </h2>
-          <p className="mt-4 text-body text-muted">{drapeReveal.sub}</p>
+          <Reveal variant="left">
+            <Label className="mb-3 block">{drapeReveal.eyebrow}</Label>
+          </Reveal>
+          <SplitText
+            as="h2"
+            text={drapeReveal.headline}
+            splitBy="word"
+            delay={0.1}
+            className="block font-display text-h1 leading-[1.02] text-ink"
+          />
+          <Reveal variant="fade" delay={0.25}>
+            <p className="mt-4 text-body text-muted">{drapeReveal.sub}</p>
+          </Reveal>
         </div>
 
+        <Reveal variant="blur" delay={0.15}>
         <div
           ref={trackRef}
           onPointerDown={(e) => {
@@ -129,6 +138,7 @@ export function DrapeReveal() {
             </button>
           </div>
         </div>
+        </Reveal>
       </Container>
     </Section>
   )

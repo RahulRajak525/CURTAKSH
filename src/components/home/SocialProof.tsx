@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Quote, ChevronLeft, ChevronRight } from 'lucide-react'
-import { Container, Section, Label, Divider } from '@/components/ui'
+import { Container, Section, Label, Divider, Reveal } from '@/components/ui'
 import { home } from '@/config/home'
 import { site } from '@/config/site'
 import { ease } from '@/lib/motion'
@@ -29,21 +29,27 @@ export function SocialProof() {
   return (
     <Section>
       <Container>
-        <Label className="mb-8 block text-center">{eyebrow}</Label>
+        <Reveal variant="fade">
+          <Label className="mb-8 block text-center">{eyebrow}</Label>
+        </Reveal>
 
         {/* press strip */}
-        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
+        <Reveal
+          variant="blur"
+          delay={0.1}
+          className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3"
+        >
           {site.footer.press.map((p) => (
             <span key={p} className="font-display text-xl text-muted/70">
               {p}
             </span>
           ))}
-        </div>
+        </Reveal>
 
         <Divider className="my-12" />
 
         {/* testimonial slider */}
-        <div className="mx-auto max-w-3xl text-center">
+        <Reveal variant="fade" delay={0.2} className="mx-auto max-w-3xl text-center">
           <Quote
             className="mx-auto mb-6 h-8 w-8 text-accent"
             strokeWidth={1.4}
@@ -102,7 +108,7 @@ export function SocialProof() {
               <ChevronRight className="h-4 w-4" strokeWidth={1.75} />
             </button>
           </div>
-        </div>
+        </Reveal>
       </Container>
     </Section>
   )

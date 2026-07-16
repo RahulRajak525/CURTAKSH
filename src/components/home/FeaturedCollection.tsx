@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useCollections } from '@/hooks'
-import { Label, Skeleton } from '@/components/ui'
+import { Label, Reveal, Skeleton, SplitText } from '@/components/ui'
 import { getImageUrl } from '@/lib/getImageUrl'
 import { home } from '@/config/home'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
@@ -83,20 +83,30 @@ export function FeaturedCollection() {
       />
 
       <div ref={textRef} className="relative z-10 max-w-2xl px-gutter text-center">
-        <Label className="mb-5 block text-white/70">{home.featured.eyebrow}</Label>
-        <h2 className="font-display text-display-2 leading-[0.95] text-white">
-          {featured.name}
-        </h2>
-        <p className="mx-auto mt-5 max-w-md text-body text-white/80">
-          {featured.tagline}. {featured.description}
-        </p>
-        <Link
-          to={`/collections/${featured.slug}`}
-          className="mt-9 inline-flex items-center gap-2 rounded-full border border-white/40 px-7 py-3 text-small text-white transition-colors duration-fast hover:bg-white hover:text-ink"
-        >
-          {home.featured.cta}
-          <ArrowRight className="h-4 w-4" strokeWidth={1.75} />
-        </Link>
+        <Reveal variant="blur">
+          <Label className="mb-5 block text-white/70">{home.featured.eyebrow}</Label>
+        </Reveal>
+        <SplitText
+          as="h2"
+          text={featured.name}
+          splitBy="char"
+          delay={0.1}
+          className="block font-display text-display-2 leading-[0.95] text-white"
+        />
+        <Reveal variant="fade" delay={0.35}>
+          <p className="mx-auto mt-5 max-w-md text-body text-white/80">
+            {featured.tagline}. {featured.description}
+          </p>
+        </Reveal>
+        <Reveal variant="blur" delay={0.5}>
+          <Link
+            to={`/collections/${featured.slug}`}
+            className="mt-9 inline-flex items-center gap-2 rounded-full border border-white/40 px-7 py-3 text-small text-white transition-colors duration-fast hover:bg-white hover:text-ink"
+          >
+            {home.featured.cta}
+            <ArrowRight className="h-4 w-4" strokeWidth={1.75} />
+          </Link>
+        </Reveal>
       </div>
     </div>
   )

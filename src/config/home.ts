@@ -39,14 +39,24 @@ export const home = {
     empty: 'New pieces are being cut. Check back shortly.',
   },
 
+  fabricOfLight: {
+    eyebrow: 'The Fabric of Light',
+    headline: 'Cloth that answers the hour.',
+    sub: 'A live sheet of silk, shaded by the same light engine that runs this page. Set the hour and watch the fabric — and the whole site — re-light itself.',
+    hudLabel: 'Light phase',
+    cta: { label: 'Explore the fabrics', href: '/fabrics' },
+  },
+
   drapeReveal: {
     eyebrow: 'Before / After',
     headline: 'See the difference a drape makes.',
     sub: 'Pull the handle across a bare, glaring window and watch the room soften — warmer light, quieter glare, a space you want to be in.',
     bareLabel: 'Bare window',
     dressedLabel: 'Dressed in Curtaksh',
-    image: '/decorandblinds/71gnRZD8N5L._AC_UF894,1000_QL80_.jpg',
-    imageAlt: 'A sunlit room interior seen through a bare window',
+    image:
+      'https://images.pexels.com/photos/1918291/pexels-photo-1918291.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    imageAlt:
+      'A modern loft living room with bare black-framed windows letting in harsh daylight',
   },
 
 

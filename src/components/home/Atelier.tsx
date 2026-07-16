@@ -19,7 +19,7 @@ export function Atelier() {
     <Section className="border-y border-line bg-surface/40">
       <Container>
         <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:items-start">
-          <Reveal variant="fade">
+          <Reveal variant="left">
             <Label className="mb-4 block">{atelier.eyebrow}</Label>
             <h2 className="font-display text-display-2 leading-[0.95] text-ink">
               {atelier.title}
@@ -37,7 +37,7 @@ export function Atelier() {
 
           <div className="grid gap-5 sm:grid-cols-3">
             {atelier.steps.map((step, i) => (
-              <Reveal key={step.n} variant="fade" delay={i * 0.08}>
+              <Reveal key={step.n} variant="right" delay={0.1 + i * 0.12}>
                 <div className="flex h-full flex-col rounded-lg border border-line bg-bg p-6 shadow-soft">
                   <div className="flex items-center justify-between">
                     <span className="flex h-10 w-10 items-center justify-center rounded-full bg-ink/[0.05] text-ink">

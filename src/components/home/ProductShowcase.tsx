@@ -2,7 +2,15 @@ import { Link } from 'react-router-dom'
 import { Plus } from 'lucide-react'
 import type { Product } from '@/types'
 import { useProducts } from '@/hooks'
-import { Container, Section, Label, Reveal, Skeleton, Marquee } from '@/components/ui'
+import {
+  Container,
+  Section,
+  Label,
+  Reveal,
+  Skeleton,
+  Marquee,
+  SplitText,
+} from '@/components/ui'
 import { getImageUrl } from '@/lib/getImageUrl'
 import { formatFrom } from '@/lib/format'
 import { home } from '@/config/home'
@@ -63,19 +71,25 @@ export function ProductShowcase() {
   return (
     <Section>
       <Container>
-        <Reveal variant="fade" className="mb-10 flex items-end justify-between">
+        <div className="mb-10 flex items-end justify-between">
           <div>
-            <Label className="mb-3 block">{home.showcase.eyebrow}</Label>
-            <h2 className="max-w-xl font-display text-h1 text-ink">
-              {home.showcase.title}
-            </h2>
+            <Reveal variant="left">
+              <Label className="mb-3 block">{home.showcase.eyebrow}</Label>
+            </Reveal>
+            <SplitText
+              as="h2"
+              text={home.showcase.title}
+              splitBy="word"
+              delay={0.1}
+              className="block max-w-xl font-display text-h1 text-ink"
+            />
           </div>
           {!isLoading && !error && !isEmpty && (
-            <Label className="hidden shrink-0 text-muted/60 md:block">
-              Hover to pause →
-            </Label>
+            <Reveal variant="right" delay={0.3} className="hidden shrink-0 md:block">
+              <Label className="text-muted/60">Hover to pause →</Label>
+            </Reveal>
           )}
-        </Reveal>
+        </div>
       </Container>
 
       {error ? (
